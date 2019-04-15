@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <title>Recipe App</title>
+</head>
+<body>
+    <div id="js-background" class="background"></div>
+    <main role="main" id="js-main" class="main">
+        <form role="form" id="js-form" class="form">
+            <label for="search-query" id="js-label" class="label">Search for:</label>
+            <input type="text" name="search-query" id="js-search-query" class="search-bar" placeholder="healthy recipes">
+            <label for="diet" id="js-label" class="label">Diet:</label>
+            <select name="diet" id="js-diet-dropdown" class="dropdown"></select>
+            <label for="cal-limit" id="js-label" class="label">Max Calories Per Meal:</label>
+            <input type="number" name="cal-limit" id="js-input" min="0" placeholder="Daily calorie limit (ex. 750)">
+            <label for="exclusions" id="js-label" class="label">Exclusions:</label>
+            <textarea name="exclusions" id="js-textarea" cols="30" rows="10" placeholder="Gluten, nuts..."></textarea>
+            <button role="button" type="submit" id="js-button" class="button search-button">Search</button>
+        </form>
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,70 @@
+/* general styles */
+body {
+    margin: 0px;
+}
+
+.background {
+    margin: 0px;
+    background-color: lightgrey;
+    width: 100vw;
+    height: 100vh;
+    z-index: -10;
+}
+
+
+
+/* font styles */
+label, select, input, textarea {
+    font-size: 25px;
+}
+
+
+
+/* starting page */
+main {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 270px;
+    min-height: 500px;
+    height: 75vh;
+    background-color: white;
+    padding: 30px;
+    border-radius: 5px;
+}
+
+form {
+    position: relative;
+    height: 100%;
+}
+
+form *:not(button) {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+select, input {
+    height: 35px;
+}
+
+select, input, textarea {
+    margin-top: 3px;
+    margin-bottom: 20px;
+}
+
+textarea {
+    height: 150px;
+}
+
+.search-button {
+    position: absolute;
+    height: 35px;
+    width: 105px;
+    right: 0px;
+    bottom: 0px;
+}
+
+:placeholder-shown {
+    font-size: 20px;
+}

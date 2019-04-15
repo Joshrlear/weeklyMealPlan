@@ -25,6 +25,54 @@ const HTML = {
     ]
 }
 
+function displayResults(Responsejson) {
+    console.log(Responsejson);
+}
+
+function getRecipes(q, diet, calLimit, exclusions) {
+
+    const query = {
+        q: q,
+        diet: diet,
+        calories: calLimit,
+        excluded: exclusions,
+        to: 7,
+        app_id: edamamAppId,
+        app_key: edamamKey
+    };
+
+
+    fetch(url)
+    .then(Response => {
+        if(Response.ok) {
+            return Response.json();
+        }
+        throw new Error(Response.statusText);
+    })
+    .then(Responsejson => displayResults(Responsejson))
+    .catch(err => {
+        $('#js-main').text(`Uh oh, something went wrong: ${err.message}`);
+    });
+}
+
+// Seperate any exclusions by commas. Removes the following: " ", ",", "and" 
+function generateEx(exclude) {
+    return exclude.split(/[\W\d]|\band|none|nothing|nope\b/g).filter(empty => empty != '').join(',');
+}
+
+// Check for blank values. If blank delete or assign a default value
+/*function handleBlank(q, diet, calLimit, exclusions) {
+    const query = [q, diet, calLimit, exclusions];
+    const filtered = query.filter(empty);
+    function empty(value) {
+        if (value !== 'N/A' || value !== null || value !== undefined || value !== '') {
+            return value;
+        }
+    }
+    console.log(filtered.join());
+    return filtered.join();
+}*/
+
 // Runs after clicking search button on start page
 function handleSearch() {
     $('#js-form').submit(event => {
@@ -33,6 +81,10 @@ function handleSearch() {
         const diet = $('#js-diet-dropdown').val();
         const calories = $('#js-input').val();
         const exclude = $('#js-textarea').val();
+        const q = query ? query : 'healthy';
+        const calLimit = calories ? `0-${calories}` : calories;
+        const exclusions = generateEx(exclude);
+        getRecipes(q, diet, calLimit, exclusions);
     })
 }
 

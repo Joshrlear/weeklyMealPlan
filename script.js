@@ -29,6 +29,18 @@ function displayResults(Responsejson) {
     console.log(Responsejson);
 }
 
+function formatQueryParams(params) {
+    /*for (let value in params) {
+        if (params[value] === 'N/A' || params[value] === undefined || params[value] === null || params[value] === '') {
+            delete params[value];
+        }
+    }*/
+    console.log(params);
+    const queryItems = Object.keys(params).map(key =>
+        `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`)
+        return queryItems.join('&');
+}
+
 function getRecipes(q, diet, calLimit, exclusions) {
 
     const query = {
@@ -41,6 +53,21 @@ function getRecipes(q, diet, calLimit, exclusions) {
         app_key: edamamKey
     };
 
+    const params = generateParam(query);
+    function generateParam(query) {
+        let newKey = {};
+        Object.keys(query).forEach((value) => {
+            if (query[value]) {
+                newKey[value] = query[value];
+            }
+        });
+        return newKey;
+    };
+
+    
+
+    const queryString = formatQueryParams(params);
+    const url = edamamRecipeUrl + '?' + queryString;
 
     fetch(url)
     .then(Response => {

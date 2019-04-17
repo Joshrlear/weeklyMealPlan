@@ -20,9 +20,77 @@ const edamamFoodUrl = 'https://api.edamam.com/api/food-database/parser';
 
 // Page HTML Database
 const HTML = {
-    options: [
+    dietOptions: [
         
-    ]
+    ],
+    weekMealPlan: `
+    <section id="js-weekday-section" class="weekday-section" data-expanded="false">
+          <article role="article" class="article">
+              <header role="header">
+                <h1>Monday</h1>
+                <h2>Recipe Name</h2>
+                <h3>730kcal</h3>
+                <p>Shrimp, rice, grape tomatoes...</p>
+                </header>
+          <img role="img" src="${edamamapi.image.placeholder}" alt="Recipe image for Monday" id="js-monday" class="weekday-recipe-img">
+          </article>
+          <article role="article" class="article">
+              <header role="header">
+                <h1>Tuesday</h1>
+                <h2>Recipe Name</h2>
+                <h3>730kcal</h3>
+                <p>Shrimp, rice, grape tomatoes...</p>
+                </header>
+            </div>
+          <img role="img" src="${edamamapi.image.placeholder}" alt="Recipe image for Tuesday" id="js-tuesday" class="weekday-recipe-img">
+          </article>
+          <article role="article" class="article">
+              <header role="header">
+                <h1>Wednesday</h1>
+                <h2>Recipe Name</h2>
+                <h3>730kcal</h3>
+                <p>Shrimp, rice, grape tomatoes...</p>
+                </header>
+          <img role="img" src="${edamamapi.image.placeholder}" alt="Recipe image for Wednesday" id="js-wednesday" class="weekday-recipe-img">
+          </article>
+          <article role="article" class="article">
+              <header role="header">
+                <h1>Thursday</h1>
+                <h2>Recipe Name</h2>
+                <h3>730kcal</h3>
+                <p>Shrimp, rice, grape tomatoes...</p>
+                </header>
+          <img role="img" src="${edamamapi.image.placeholder}" alt="Recipe image for Thursday" id="js-thursday" class="weekday-recipe-img">
+          </article>
+          <article role="article" class="article">
+              <header role="header">
+                <h1>Friday</h1>
+                <h2>Recipe Name</h2>
+                <h3>730kcal</h3>
+                <p>Shrimp, rice, grape tomatoes...</p>
+                </header>
+          <img role="img" src="${edamamapi.image.placeholder}" alt="Recipe image for Friday" id="js-friday" class="weekday-recipe-img">
+          </article>
+          <article role="article" class="article">
+              <header role="header">
+                <h1>Saturday</h1>
+                <h2>Recipe Name</h2>
+                <h3>730kcal</h3>
+                <p>Shrimp, rice, grape tomatoes...</p>
+                </header>
+          <img role="img" src="${edamamapi.image.placeholder}" alt="Recipe image for Saturday" id="js-saturday" class="weekday-recipe-img">
+          </article>
+          <article role="article" class="article">
+              <header role="header">
+                <h1>Sunday</h1>
+                <h2>Recipe Name</h2>
+                <h3>730kcal</h3>
+                <p>Shrimp, rice, grape tomatoes...</p>
+                </header>
+          <img role="img" src="${edamamapi.image.placeholder}" alt="Recipe image for Sunday" id="js-sunday" class="weekday-recipe-img">
+          </article>
+          </section>
+    `,
 }
 
 function displayResults(Responsejson) {

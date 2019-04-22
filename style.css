@@ -1,6 +1,7 @@
 /* general styles */
 body {
     margin: 0px;
+    box-sizing: border-box;
 }
 
 .background {
@@ -68,3 +69,184 @@ textarea {
 :placeholder-shown {
     font-size: 20px;
 }
+
+
+/* week list meal plan */
+body {
+    box-sizing: border-box;
+    margin: 0px;
+  }
+  
+  .container {
+    width: 100%;
+    max-width: 1024px;
+    height: 50vh;
+    min-height: 300px;
+    display: grid;
+    padding: 0px;
+    margin: 0px auto;
+  }
+  
+  li {
+    list-style: none;
+  }
+  
+  .box {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  
+  .header-container {
+    position: relative;
+  }
+  
+  .recipe-header {
+    position: absolute;
+    z-index: 1;
+    left: 10%;
+    color: white;
+  }
+  
+  .recipe-info {
+    padding: 0px 15px 25px 15px;
+    margin-top: 0px;
+  }
+  
+  .info-header {
+    display: grid;
+    grid-template-areas: 
+    "b a"
+    "c c"
+    "d ."
+  }
+  
+  .info-header h1 {
+    grid-area: a;
+    position: relative;
+    top: 5%;
+    text-align: right;
+  }
+  
+  .info-header h2 {
+    grid-area: b;
+  }
+  
+  .info-header h3 {
+    grid-area: c;
+    font-size: 1rem;
+  }
+  
+  .info-header p {
+    grid-area: d;
+  }
+  
+  .ingredient-list {
+    padding-left: 0px;
+  }
+  
+  .ingredient-list li::before {
+    content: "- ";
+  }
+  
+  img {
+    width: 100%;
+  }
+  
+  .recipe-img {
+    filter: brightness(0.6);
+  }
+  
+  
+  /* nutrition label general styling */
+  .nutrition-border {
+    box-sizing: border-box;
+    border: black solid 2px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    min-width: 318px;
+    max-width: 600px;
+  }
+  
+  .nutrition-border, .nutrition-border > * {
+    width: 100%;
+  }
+  
+  table {
+    text-align: left;
+    border-collapse: collapse;
+  }
+  
+  th {
+    font-weight: 400;
+  }
+  
+  tr {
+    border-bottom: black solid 1px;
+    height: 25px;
+  }
+  
+  
+  /* nutrition label frequently used */
+  .text-right {
+    text-align: right;
+  }
+  
+  .third {
+    width: 33%;
+  }
+  
+  .sub-heading {
+    padding-left: 20px;
+  }
+  
+  
+  /* nutrition label line seperators */
+  .thick-line {
+    border-bottom: black solid 10px;
+    margin-bottom: 8px;
+  }
+  
+  .med-line {
+    border-bottom: black solid 5px;
+    line-height: 28px;
+  }
+  
+  .no-bottom-border {
+    border-bottom: none;
+  }
+  
+  
+  /* nutrition label specific margin, padding */
+  .nutrition-title {
+    margin-top: 0px;
+    margin-bottom: 0px;
+  }
+  
+  .small-margin {
+    margin-top: 2px;
+    margin-bottom: 2px;
+  }
+  
+  .row-spacing {
+    margin-top: -12px;
+  }
+  
+  .no-right-pad {
+    padding-right: 0px;
+  }
+  
+  .left-pad {
+    padding-left: 50px;
+  }
+  
+  
+  /* nutrition label misc */
+  .small-info {
+    font-size: 0.7rem;
+  }
+  
+  .vitamin-right::before {
+    content: "•";
+    margin-right: 8px;
+  }  

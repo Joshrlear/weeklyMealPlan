@@ -23,78 +23,50 @@ const HTML = {
     dietOptions: [
         
     ],
-    weekMealPlan: `
-    <section id="js-weekday-section" class="weekday-section" data-expanded="false">
-          <article role="article" class="article">
-              <header role="header">
-                <h1>Monday</h1>
-                <h2>Recipe Name</h2>
-                <h3>730kcal</h3>
-                <p>Shrimp, rice, grape tomatoes...</p>
-                </header>
-          <img role="img" src="${edamamapi.image.placeholder}" alt="Recipe image for Monday" id="js-monday" class="weekday-recipe-img">
+    weekMealPlan: 
+    `<ul id="js-container" class="container">
+    <li id="js-box" class="box box1" data-expand="false">
+      <section class="header-container">
+      <header role="header" id="js-recipe-header" class="recipe-header">
+          <h1>{day}</h1>
+          <h2>{recipe}</h2>
+          <h3>{mealCals}kcal</h3>
+          <p>{ingredient-list-snippet}</p>
+      </header>
+      <img role="img" src="https://www.rd.com/wp-content/uploads/2018/06/healthy-food.jpg" alt="Recipe image for Monday" id="js-recipe-img" class="recipe-img">
+      </section>
+      <section id="js-section" class="section">
+        <section class="recipe-info">
+          <header class="info-header">
+            <h1>{day}</h1>
+            <h2>{recipe}</h2>
+            <h3>{mealCals}kcal per serving | {yields} Servings</h3>
+            <p><em>Takes approximately: {time}</em></p>
+          </header>
+          <article>
+            <h2>Ingredients</h2>
+            <ul id="js-ingredient-list" class="ingredient-list">
+            </ul>
           </article>
-          <article role="article" class="article">
-              <header role="header">
-                <h1>Tuesday</h1>
-                <h2>Recipe Name</h2>
-                <h3>730kcal</h3>
-                <p>Shrimp, rice, grape tomatoes...</p>
-                </header>
-            </div>
-          <img role="img" src="${edamamapi.image.placeholder}" alt="Recipe image for Tuesday" id="js-tuesday" class="weekday-recipe-img">
-          </article>
-          <article role="article" class="article">
-              <header role="header">
-                <h1>Wednesday</h1>
-                <h2>Recipe Name</h2>
-                <h3>730kcal</h3>
-                <p>Shrimp, rice, grape tomatoes...</p>
-                </header>
-          <img role="img" src="${edamamapi.image.placeholder}" alt="Recipe image for Wednesday" id="js-wednesday" class="weekday-recipe-img">
-          </article>
-          <article role="article" class="article">
-              <header role="header">
-                <h1>Thursday</h1>
-                <h2>Recipe Name</h2>
-                <h3>730kcal</h3>
-                <p>Shrimp, rice, grape tomatoes...</p>
-                </header>
-          <img role="img" src="${edamamapi.image.placeholder}" alt="Recipe image for Thursday" id="js-thursday" class="weekday-recipe-img">
-          </article>
-          <article role="article" class="article">
-              <header role="header">
-                <h1>Friday</h1>
-                <h2>Recipe Name</h2>
-                <h3>730kcal</h3>
-                <p>Shrimp, rice, grape tomatoes...</p>
-                </header>
-          <img role="img" src="${edamamapi.image.placeholder}" alt="Recipe image for Friday" id="js-friday" class="weekday-recipe-img">
-          </article>
-          <article role="article" class="article">
-              <header role="header">
-                <h1>Saturday</h1>
-                <h2>Recipe Name</h2>
-                <h3>730kcal</h3>
-                <p>Shrimp, rice, grape tomatoes...</p>
-                </header>
-          <img role="img" src="${edamamapi.image.placeholder}" alt="Recipe image for Saturday" id="js-saturday" class="weekday-recipe-img">
-          </article>
-          <article role="article" class="article">
-              <header role="header">
-                <h1>Sunday</h1>
-                <h2>Recipe Name</h2>
-                <h3>730kcal</h3>
-                <p>Shrimp, rice, grape tomatoes...</p>
-                </header>
-          <img role="img" src="${edamamapi.image.placeholder}" alt="Recipe image for Sunday" id="js-sunday" class="weekday-recipe-img">
-          </article>
+        </section>
           </section>
-    `,
+    </li>
+    </ul>`
+};
+
+function generateIngredientList(Responsejson) {
+    const ingredientList = [];
+    const ingredients = Responsejson.hits[0].recipe.ingredientLines;
+    for (let i of ingredients) {
+        ingredientList.push(`<li>${i}</li>`);
+    }
+    $('#js-main').html(HTML.weekMealPlan);
+    $('#js-ingredient-list').html(ingredientList);
 }
 
 function displayResults(Responsejson) {
     console.log(Responsejson);
+    generateIngredientList(Responsejson);
 }
 
 function formatQueryParams(params) {

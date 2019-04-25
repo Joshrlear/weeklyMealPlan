@@ -4,13 +4,13 @@ body {
     box-sizing: border-box;
 }
 
-.background {
+/*.background {
     margin: 0px;
     background-color: lightgrey;
     width: 100vw;
     height: 100vh;
     z-index: -10;
-}
+}*/
 
 
 

@@ -41,11 +41,6 @@ function getWeekDay(i) {
 }
 
 function getRecipeName(Responsejson, i) {
-    console.log(Responsejson.hits);
-    console.log(i);
-    console.log(Responsejson.hits[i]);
-    console.log(Responsejson.hits[i].recipe);
-    console.log(Responsejson.hits[i].recipe.label);
     return Responsejson.hits[i].recipe.label;
 }
 
@@ -85,6 +80,15 @@ function getImage(Responsejson, i) {
 
 function displayResults(Responsejson) {
     $('#js-main').empty();
+    $('#js-main').css({
+        position: 'unset',
+        top: 'unset',
+        left: 'unset',
+        transform: 'unset',
+        width: '100vw',
+        padding: '0px'
+    });
+    $('#js-main').html(`<ul id="js-container" class="container"></ul>`)
     const num = Responsejson.to;
     console.log(Responsejson);
 
@@ -105,36 +109,36 @@ function displayResults(Responsejson) {
         //console.log('ingredients');
         const image = getImage(Responsejson, i);
         //console.log(image);
-        $('#js-main').append(
-            `<ul id="js-container" class="container">
-                <li id="js-box" class="box box1" data-expand="false">
-                  <section class="header-container">
-                  <header role="header" id="js-recipe-header" class="recipe-header">
-                      <h1>${day}</h1>
-                      <h2>${recipe}</h2>
-                      <h3>${calories}kcal</h3>
-                      <p>${snippet}...</p>
+        
+        $('#js-container').append(
+            `
+            <li id="js-box" class="box box1" data-expand="false">
+              <section class="header-container">
+              <header role="header" id="js-recipe-header" class="recipe-header">
+                  <h1>${day}</h1>
+                  <h2>${recipe}</h2>
+                  <h3>${calories}kcal</h3>
+                  <p>${snippet}...</p>
+              </header>
+              <img role="img" src=${image} alt="Recipe image for Monday" id="js-recipe-img" class="recipe-img">
+              </section>
+              <section id="js-section" class="section">
+                <section class="recipe-info">
+                  <header class="info-header">
+                    <h1>${day}</h1>
+                    <h2>${recipe}</h2>
+                    <h3>${calories}kcal per serving | ${servings} Servings</h3>
+                    <p><em>Takes approximately: ${timeToMake}</em></p>
                   </header>
-                  <img role="img" src=${image} alt="Recipe image for Monday" id="js-recipe-img" class="recipe-img">
+                  <article>
+                    <h2>Ingredients</h2>
+                    <ul id="js-ingredient-list" class="ingredient-list">
+                    ${ingredients}
+                    </ul>
+                  </article>
+                </section>
                   </section>
-                  <section id="js-section" class="section">
-                    <section class="recipe-info">
-                      <header class="info-header">
-                        <h1>${day}</h1>
-                        <h2>${recipe}</h2>
-                        <h3>${calories}kcal per serving | ${servings} Servings</h3>
-                        <p><em>Takes approximately: ${timeToMake}</em></p>
-                      </header>
-                      <article>
-                        <h2>Ingredients</h2>
-                        <ul id="js-ingredient-list" class="ingredient-list">
-                        ${ingredients}
-                        </ul>
-                      </article>
-                    </section>
-                      </section>
-                </li>
-            </ul>
+            </li>
             `
         )
     }

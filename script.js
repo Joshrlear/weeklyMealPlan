@@ -41,6 +41,11 @@ function getWeekDay(i) {
 }
 
 function getRecipeName(Responsejson, i) {
+    console.log(Responsejson.hits);
+    console.log(i);
+    console.log(Responsejson.hits[i]);
+    console.log(Responsejson.hits[i].recipe);
+    console.log(Responsejson.hits[i].recipe.label);
     return Responsejson.hits[i].recipe.label;
 }
 
@@ -83,23 +88,23 @@ function displayResults(Responsejson) {
     const num = Responsejson.to;
     console.log(Responsejson);
 
-    for (let i = 0; i <= num; i++) {
+    for (let i = 0; i < num; i++) {
         const day = getWeekDay(i);
-        console.log(day);
+        //console.log(day);
         const recipe = getRecipeName(Responsejson, i);
-        console.log(recipe);
+        //console.log(recipe);
         const snippet = getSnippet(Responsejson, i);
-        console.log(snippet);
+        //console.log(snippet);
         const calories = getCals(Responsejson, i);
-        console.log(calories);
+        //console.log(calories);
         const servings = getServings(Responsejson, i);
-        console.log(servings);
+        //console.log(servings);
         const timeToMake = getTimeToMake(Responsejson, i);
-        console.log(timeToMake);
+        //console.log(timeToMake);
         const ingredients = getIngredients(Responsejson, i);
-        console.log('ingredients');
+        //console.log('ingredients');
         const image = getImage(Responsejson, i);
-        console.log(image);
+        //console.log(image);
         $('#js-main').append(
             `<ul id="js-container" class="container">
                 <li id="js-box" class="box box1" data-expand="false">

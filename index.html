@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display|Poppins" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <title>Recipe App</title>
 </head>
@@ -20,6 +21,14 @@
         <form role="form" id="js-form" class="form">
             <label for="search-query" id="js-label" class="label">Search for:</label>
             <input type="text" name="search-query" id="js-search-query" class="search-bar" placeholder="healthy recipes">
+            <label for="meal-type" id="js-label" class="label">Meal</label>
+            <select name="meal-type" id="js-meal-dropdown" class="dropdown">
+                <option value="breakfast">breakfast</option>
+                <option value="lunch">lunch</option>
+                <option value="dinner">dinner</option>
+                <option value="snack">snack</option>
+                <option value="dessert">dessert</option>
+            </select>
             <label for="diet" id="js-label" class="label">Diet:</label>
             <select name="diet" id="js-diet-dropdown" class="dropdown">
                 <option value="balanced">balanced</option>

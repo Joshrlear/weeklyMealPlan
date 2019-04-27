@@ -10,20 +10,62 @@
 </head>
 <body>
     <div id="js-background" class="background"></div>
-    <main role="main" id="js-main" class="main">
+    <div id="js-menu-toggle" class="menu-toggle hidden">
+        <input type="checkbox" id="js-menu-input" name="menu-toggle">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+    <main role="main" id="js-main" class="main container-hidden">
         <form role="form" id="js-form" class="form">
             <label for="search-query" id="js-label" class="label">Search for:</label>
             <input type="text" name="search-query" id="js-search-query" class="search-bar" placeholder="healthy recipes">
             <label for="diet" id="js-label" class="label">Diet:</label>
-            <select name="diet" id="js-diet-dropdown" class="dropdown"></select>
+            <select name="diet" id="js-diet-dropdown" class="dropdown">
+                <option value="balanced">balanced</option>
+                <option value="high-fiber">high-fiber</option>
+                <option value="high-protein">high-protein</option>
+                <option value="low-carb">low-carb</option>
+                <option value="low-fat">low-fat</option>
+                <option value="low-sodium">low-sodium</option>
+                <option value="alcohol-free">alcohol-free</option>
+                <option value="celery-free">celery-free</option>
+                <option value="crustacean-free">crustacean-free</option>
+                <option value="dairy-free">dairy-free</option>
+                <option value="egg-free">egg-free</option>
+                <option value="fish-free">fish-free</option>
+                <option value="gluten-free">gluten-free</option>
+                <option value="keto-friendly">keto-friendly</option>
+                <option value="kidney-friendly">kidney-friendly</option>
+                <option value="kosher">kosher</option>
+                <option value="low-potassium">low-potassium</option>
+                <option value="lupine-free">lupine-free</option>
+                <option value="mustard-free">mustard-free</option>
+                <option value="No-oil-added">No-oil-added</option>
+                <option value="low-sugar">low-sugar</option>
+                <option value="paleo">paleo</option>
+                <option value="peanut-free">peanut-free</option>
+                <option value="pescatarian">pescatarian</option>
+                <option value="pork-free">pork-free</option>
+                <option value="red-meat-free">red-meat-free</option>
+                <option value="sesame-free">sesame-free</option>
+                <option value="shellfish-free">shellfish-free</option>
+                <option value="soy-free">soy-free</option>
+                <option value="sugar-conscious">sugar-conscious</option>
+                <option value="tree-nut-free">tree-nut-free</option>
+                <option value="vegan">vegan</option>
+                <option value="vegetarian">vegetarian</option>
+                <option value="wheat-free">wheat-free</option>
+            </select>
             <label for="cal-limit" id="js-label" class="label">Max Calories Per Meal:</label>
             <input type="number" name="cal-limit" id="js-input" min="0" placeholder="Daily calorie limit (ex. 750)">
             <label for="exclusions" id="js-label" class="label">Exclusions:</label>
             <textarea name="exclusions" id="js-textarea" cols="30" rows="10" placeholder="Gluten, nuts..."></textarea>
             <button role="button" type="submit" id="js-button" class="button search-button">Search</button>
         </form>
+        <ul id="js-container" class="container hidden"></ul>
     </main>
     <script src="api.js"></script>
-    <script src="animate.js"></script>
+    <script src="expand-list-item.js"></script>
 </body>
 </html>

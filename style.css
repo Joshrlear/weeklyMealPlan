@@ -19,19 +19,59 @@ label, select, input, textarea {
     font-size: 25px;
 }
 
+h1 {
+  font-size: 3.5rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+h2 {
+  font-size: 2.5rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+h3 {
+  font-size: 2rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+h4 {
+  font-size: 1.5rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+h5 {
+  font-size: 1.25rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+h6 {
+  font-size: 0.75rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+p {
+  font-size: 1.5rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+li {
+  font-size: 1.5rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
 
 
 /* starting page */
 main {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 270px;
     min-height: 500px;
     height: 75vh;
-    background-color: white;
-    padding: 30px;
     border-radius: 5px;
 }
 
@@ -72,181 +112,284 @@ textarea {
 
 
 /* week list meal plan */
-body {
-    box-sizing: border-box;
-    margin: 0px;
-  }
-  
-  .container {
-    width: 100%;
-    max-width: 1024px;
-    height: 50vh;
-    min-height: 300px;
-    display: grid;
-    padding: 0px;
-    margin: 0px auto;
-  }
-  
-  li {
-    list-style: none;
-  }
-  
-  .box {
-    width: 100%;
-    margin-bottom: 10px;
-  }
-  
-  .header-container {
-    position: relative;
-  }
-  
-  .recipe-header {
-    position: absolute;
-    z-index: 1;
-    left: 10%;
-    color: white;
-  }
-  
-  .recipe-info {
-    padding: 0px 15px 25px 15px;
-    margin-top: 0px;
-  }
-  
-  .info-header {
-    display: grid;
-    grid-template-areas: 
-    "b a"
-    "c c"
-    "d ."
-  }
-  
-  .info-header h1 {
-    grid-area: a;
-    position: relative;
-    top: 5%;
-    text-align: right;
-  }
-  
-  .info-header h2 {
-    grid-area: b;
-  }
-  
-  .info-header h3 {
-    grid-area: c;
-    font-size: 1rem;
-  }
-  
-  .info-header p {
-    grid-area: d;
-  }
-  
-  .ingredient-list {
-    padding-left: 0px;
-  }
-  
-  .ingredient-list li::before {
-    content: "- ";
-  }
-  
-  img {
-    width: 100%;
-  }
-  
-  .recipe-img {
-    filter: brightness(0.6);
-  }
-  
-  
-  /* nutrition label general styling */
-  .nutrition-border {
-    box-sizing: border-box;
-    border: black solid 2px;
-    padding: 10px;
-    display: flex;
-    flex-direction: column;
-    min-width: 318px;
-    max-width: 600px;
-  }
-  
-  .nutrition-border, .nutrition-border > * {
-    width: 100%;
-  }
-  
-  table {
-    text-align: left;
-    border-collapse: collapse;
-  }
-  
-  th {
-    font-weight: 400;
-  }
-  
-  tr {
-    border-bottom: black solid 1px;
-    height: 25px;
-  }
-  
-  
-  /* nutrition label frequently used */
-  .text-right {
-    text-align: right;
-  }
-  
-  .third {
-    width: 33%;
-  }
-  
-  .sub-heading {
-    padding-left: 20px;
-  }
-  
-  
-  /* nutrition label line seperators */
-  .thick-line {
-    border-bottom: black solid 10px;
-    margin-bottom: 8px;
-  }
-  
-  .med-line {
-    border-bottom: black solid 5px;
-    line-height: 28px;
-  }
-  
-  .no-bottom-border {
-    border-bottom: none;
-  }
-  
-  
-  /* nutrition label specific margin, padding */
-  .nutrition-title {
-    margin-top: 0px;
-    margin-bottom: 0px;
-  }
-  
-  .small-margin {
-    margin-top: 2px;
-    margin-bottom: 2px;
-  }
-  
-  .row-spacing {
-    margin-top: -12px;
-  }
-  
-  .no-right-pad {
-    padding-right: 0px;
-  }
-  
-  .left-pad {
-    padding-left: 50px;
-  }
-  
-  
-  /* nutrition label misc */
-  .small-info {
-    font-size: 0.7rem;
-  }
-  
-  .vitamin-right::before {
-    content: "•";
-    margin-right: 8px;
-  }  
+.container {
+  width: 100%;
+  max-width: 1024px;
+  height: 50vh;
+  min-height: 300px;
+  display: grid;
+  padding: 0px;
+  margin: 0px auto;
+}
+
+li {
+  list-style: none;
+}
+
+.box {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.header-container {
+  position: relative;
+  margin-top: -14px;
+  margin-bottom: -14px;
+}
+
+.recipe-header {
+  position: absolute;
+  z-index: 1;
+  padding: 30px;
+  color: white;
+}
+
+.recipe-info {
+  padding: 0px 15px 25px 15px;
+  margin-top: 0px;
+}
+
+.info-header {
+  display: grid;
+  grid-template-areas: 
+  "b a"
+  "c c"
+  "d ."
+}
+
+.info-header h1 {
+  grid-area: a;
+  position: relative;
+  top: 5%;
+  text-align: right;
+}
+
+.info-header h2 {
+  grid-area: b;
+}
+
+.info-header h3 {
+  grid-area: c;
+  font-size: 1rem;
+}
+
+.info-header p {
+  grid-area: d;
+}
+
+.ingredient-list {
+  padding-left: 0px;
+}
+
+.ingredient-list li::before {
+  content: "- ";
+}
+
+.img-container {
+  overflow: hidden;
+}
+
+img {
+  width: 105%;
+  margin-left: -2.5%;
+}
+
+.recipe-img {
+  filter: brightness(0.6);
+}
+
+.tint-blur {
+  filter: brightness(60%) blur(2px);
+
+}
+
+/* error message */
+.err-message {
+  padding: 30px;
+}
+
+
+/* nutrition label general styling */
+.nutrition-border {
+  box-sizing: border-box;
+  border: black solid 2px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  min-width: 318px;
+  max-width: 600px;
+}
+
+.nutrition-border, .nutrition-border > * {
+  width: 100%;
+}
+
+table {
+  text-align: left;
+  border-collapse: collapse;
+}
+
+th {
+  font-weight: 400;
+}
+
+tr {
+  border-bottom: black solid 1px;
+  height: 25px;
+}
+
+
+/* nutrition label frequently used */
+.text-right {
+  text-align: right;
+}
+
+.third {
+  width: 33%;
+}
+
+.sub-heading {
+  padding-left: 20px;
+}
+
+
+/* nutrition label line seperators */
+.thick-line {
+  border-bottom: black solid 10px;
+  margin-bottom: 8px;
+}
+
+.med-line {
+  border-bottom: black solid 5px;
+  line-height: 28px;
+}
+
+.no-bottom-border {
+  border-bottom: none;
+}
+
+
+/* nutrition label specific margin, padding */
+.nutrition-title {
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+.small-margin {
+  margin-top: 2px;
+  margin-bottom: 2px;
+}
+
+.row-spacing {
+  margin-top: -12px;
+}
+
+.no-right-pad {
+  padding-right: 0px;
+}
+
+.left-pad {
+  padding-left: 50px;
+}
+
+
+/* nutrition label misc */
+.small-info {
+  font-size: 0.7rem;
+}
+
+.vitamin-right::before {
+  content: "•";
+  margin-right: 8px;
+}  
+
+/* Animations */
+.form-hidden {
+  padding: 0px;
+  position: unset;
+  top: unset;
+  left: unset;
+  transform: unset;
+  width: unset;
+}
+
+.container-hidden {
+  padding: 30px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 270px;
+}
+
+.hidden {
+  display: none;
+}
+
+
+/* hamburger menu */
+.menu-toggle {
+  display: block;
+  position: fixed;
+  top: 25px;
+  right: 25px;
+  z-index: 10;
+}
+
+.menu-toggle input {
+  width: 40px;
+  height: 32px;
+  position: absolute;
+  top: -7px;
+  left: -5px;
+  cursor: pointer;
+  opacity: 0;
+  z-index: 20;
+}
+
+.menu-toggle span {
+  display: block;
+  width: 33px;
+  height: 4px;
+  margin-bottom: 5px;
+  position: relative;
+  background-color: rgb(214, 214, 214);
+  border-radius: 3px;
+  z-index: 10;
+  transform-origin: 4px 0px;
+  transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1.0),
+              background 0.5s cubic-bezier(0.77, 0.2, 0.05, 1.0),
+              opacity 0.55s ease;
+}
+
+.menu-toggle span:first-child {
+  transform-origin: 0% 0%;
+}
+
+.menu-toggle span:nth-last-child(2) {
+  transform-origin: 0% 100%;
+}
+
+.menu-toggle input:checked ~ span {
+  opacity: 1;
+  transform: rotate(-45deg) translate(0px, 8px);
+}
+
+.menu-toggle input:checked ~ span:nth-last-child(3) {
+  opacity: 0;
+  transform: rotate(0deg) scale(0.2, 0.2);
+}
+
+.menu-toggle input:checked ~ span:nth-last-child(2) {
+  transform: rotate(45deg) translate(0, -10px);
+}
+
+/* make absolute and centered*/
+.toggleForm {
+  transform: translate(0%, 0);
+}
+
+/* slide form from right */
+.menu-toggle input:checked {
+  transform: none;
+}

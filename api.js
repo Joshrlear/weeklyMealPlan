@@ -1,9 +1,5 @@
 'use strict'
 
-// Background Image API
-const pixabayApi = '12181901-0ae683bad462aef9e23b07d08';
-const pixabayUrl = 'https://pixabay.com/api/';
-
 // Edamam Key and ID
 const edamamKey = '3ea9d172ac4a9f190c88c7603e386b8f';
 const edamamAppId = '97ad01ba';
@@ -11,11 +7,6 @@ const edamamAppId = '97ad01ba';
 // Edamam Recipe API
 const edamamRecipeUrl = 'https://api.edamam.com/search';
 
-// Edamam Nutrition API
-const edamamNutritionUrl = 'https://api.edamam.com/api/nutrition-details';
-
-// Edamam Food API
-const edamamFoodUrl = 'https://api.edamam.com/api/food-database/parser';
 
 
 function getWeekDay(i) {
@@ -56,7 +47,7 @@ function getServings(Responsejson, i) {
 
 function getTimeToMake(Responsejson, i) {
     const time = Responsejson.hits[i].recipe.totalTime;
-    return `${time}mins`
+    return `<b>${time}mins</b>`
 }
 
 function getSnippet(Responsejson, i) {
@@ -69,9 +60,10 @@ function getIngredients(Responsejson, i) {
     const ingredientList = []
     const ingredients = Responsejson.hits[i].recipe.ingredientLines;
     for (let x of ingredients) {
-        ingredientList.push(`<li>${x}</li>`);
+        ingredientList.push(`<li>${x}</li><br>`);
     }
-    return ingredientList;
+    const ingredientString = ingredientList.join('');
+    return ingredientString;
 }
 
 function getImage(Responsejson, i) {
@@ -79,55 +71,42 @@ function getImage(Responsejson, i) {
 }
 
 function displayResults(Responsejson) {
-    $('#js-main').empty();
-    $('#js-main').css({
-        position: 'unset',
-        top: 'unset',
-        left: 'unset',
-        transform: 'unset',
-        width: '100vw',
-        padding: '0px'
-    });
-    $('#js-main').html(`<ul id="js-container" class="container"></ul>`)
+    $('#js-container').empty();
+    
+    //$('#js-main').append(`<ul id="js-container" class="container"></ul>`)
     const num = Responsejson.to;
     console.log(Responsejson);
 
     for (let i = 0; i < num; i++) {
         const day = getWeekDay(i);
-        //console.log(day);
         const recipe = getRecipeName(Responsejson, i);
-        //console.log(recipe);
         const snippet = getSnippet(Responsejson, i);
-        //console.log(snippet);
         const calories = getCals(Responsejson, i);
-        //console.log(calories);
         const servings = getServings(Responsejson, i);
-        //console.log(servings);
         const timeToMake = getTimeToMake(Responsejson, i);
-        //console.log(timeToMake);
         const ingredients = getIngredients(Responsejson, i);
-        //console.log('ingredients');
         const image = getImage(Responsejson, i);
-        //console.log(image);
         
         $('#js-container').append(
             `
             <li id="js-box" class="box box1" data-expand="false">
-              <section class="header-container">
+              <section id="js-header-container" class="header-container">
               <header role="header" id="js-recipe-header" class="recipe-header">
                   <h1>${day}</h1>
-                  <h2>${recipe}</h2>
-                  <h3>${calories}kcal</h3>
+                  <h3>${recipe}</h3>
+                  <p>${calories}kcal</p>
                   <p>${snippet}...</p>
               </header>
-              <img role="img" src=${image} alt="Recipe image for Monday" id="js-recipe-img" class="recipe-img">
+              <div id="js-img-container" class="img-container">
+                <img role="img" src=${image} alt="image of ${recipe} for ${day}" id="js-recipe-img" class="recipe-img tint-blur">
+              </div>
               </section>
-              <section id="js-section" class="section">
+              <section id="js-section" class="section hidden">
                 <section class="recipe-info">
                   <header class="info-header">
-                    <h1>${day}</h1>
+                    <h4>${day}</h4>
                     <h2>${recipe}</h2>
-                    <h3>${calories}kcal per serving | ${servings} Servings</h3>
+                    <p${calories}kcal per serving | ${servings} Servings</p>
                     <p><em>Takes approximately: ${timeToMake}</em></p>
                   </header>
                   <article>
@@ -141,7 +120,9 @@ function displayResults(Responsejson) {
             </li>
             `
         )
+        
     }
+    $('#js-menu-toggle').removeClass('hidden');
 }
 
 
@@ -161,7 +142,7 @@ function getRecipes(q, diet, calLimit, exclusions) {
 
     const query = {
         q: q,
-        diet: diet,
+        //diet: diet,
         calories: calLimit,
         excluded: exclusions,
         to: 7,
@@ -194,27 +175,16 @@ function getRecipes(q, diet, calLimit, exclusions) {
     })
     .then(Responsejson => displayResults(Responsejson))
     .catch(err => { console.log(err);
-        $('#js-main').text(`Uh oh, something went wrong: ${err.message}`);
+        $('#js-main').html(`<div class="err-message"><h3>Uh oh, something went wrong: ${err.message}</h3><br>
+        <p>Your parameters may be too retricitve. Try changing your search parameters and try again.</p></div>`);
     });
 }
 
 // Seperate any exclusions by commas. Removes the following: " ", ",", "and" 
 function generateEx(exclude) {
-    return exclude.split(/[\W\d]|\band|none|nothing|nope\b/g).filter(empty => empty != '').join(',');
+    return exclude.split(/[\W\d]|\band|none|nothing|or|nope\b/g).filter(empty => empty != '').join(',');
 }
 
-// Check for blank values. If blank delete or assign a default value
-/*function handleBlank(q, diet, calLimit, exclusions) {
-    const query = [q, diet, calLimit, exclusions];
-    const filtered = query.filter(empty);
-    function empty(value) {
-        if (value !== 'N/A' || value !== null || value !== undefined || value !== '') {
-            return value;
-        }
-    }
-    console.log(filtered.join());
-    return filtered.join();
-}*/
 
 // Runs after clicking search button on start page
 function handleSearch() {
@@ -224,15 +194,35 @@ function handleSearch() {
         const diet = $('#js-diet-dropdown').val();
         const calories = $('#js-input').val();
         const exclude = $('#js-textarea').val();
-        const q = query ? query : 'healthy';
+
+        // in the future make diet/health it's own param for better results
+        const q = query ? `${query}, ${diet}` : `healthy, ${diet}`;
         const calLimit = calories ? `0-${calories}` : calories;
         const exclusions = generateEx(exclude);
         getRecipes(q, diet, calLimit, exclusions);
+        $('#js-main').toggleClass('form-hidden');
+        $('#js-main').toggleClass('container-hidden');
+        $('#js-container').toggleClass('hidden');
+        $('#js-form').toggleClass('hidden');
+        $('#js-menu-toggle').one().fadeIn(750);
+        $('#js-menu-input').prop('checked', false);
+    })
+}
+
+
+function handleMenuClick() {
+    $('#js-menu-input').on('click', function() {
+        $('#js-container').toggleClass('hidden');
+        $('#js-form').toggleClass('hidden');
+        $('#js-main').toggleClass('form-hidden')
+        $('#js-main').toggleClass('container-hidden');
     })
 }
 
 // Runs on page load
 $(function onLoad() {
     console.log('load');
+    $('#js-menu-toggle').hide();
     handleSearch();
+    handleMenuClick();
 })

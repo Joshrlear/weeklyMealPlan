@@ -5,11 +5,12 @@ body {
 }
 
 .background {
-    margin: 0px;
-    overflow: hidden;
-    width: 100vw;
-    height: 100vh;
-    z-index: -10;
+  display: none;
+  margin: 0px;
+  overflow: hidden;
+  width: 100vw;
+  height: 100vh;
+  z-index: -10;
 }
 
 .background-img-api {
@@ -86,6 +87,7 @@ main {
     /*min-height: 500px;
     height: 75vh;*/
     border-radius: 5px;
+    background-color: white;
 }
 
 form {
@@ -487,6 +489,7 @@ tr {
   /* desktop and laptops */
   @media only screen and (min-width: 1100px) {
     .background {
+      display: block;
       width: 100vw;
       height: 100vh;
       object-fit: cover;

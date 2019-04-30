@@ -27,7 +27,7 @@ function expandDay() {
     $('[data-expand="true"]').find('#js-recipe-img').removeClass('tint-blur');
     // later think about using keyframes to animate the above feature
     $('[data-expand="true"]').find('#js-section').show(750);
-    $('[data-expand="true"]').find('#js-recipe-header').hide(500);
+    $('[data-expand="true"]').find('#js-recipe-header').fadeOut(500);
     $('[data-expand="true"]').find('#js-recipe-img').css({"filter": "brightness(1) blur(0px)"});
     $('[data-expand="true"]').find('#js-header-container').css({"margin-bottom": "unset", "margin-bottom": "unset"});
 
@@ -39,7 +39,7 @@ function expandDay() {
 
     // animate on collapse
     $('[data-expand="false"]').find('#js-section').hide(500);
-    $('[data-expand="false"]').find('#js-recipe-header').show(750);
+    $('[data-expand="false"]').find('#js-recipe-header').fadeIn(750);
     $('[data-expand="false"]').find('#js-recipe-img').css({"filter": "brightness(0.6) blur(2px)"});
     $('[data-expand="false"]').find('#js-header-container').css({"margin-top": "-14px", "margin-bottom": "-14px"});
   })

@@ -18,6 +18,7 @@ body {
   height: 100%;
   margin: 0px;
   object-fit: cover;
+  filter: blur(3px);
 }
 
 /* font styles */
@@ -414,11 +415,22 @@ tr {
 /* All screens except older phones like Galaxy S5 */
 @media only screen and (min-width: 376px) {
   form {
-    top: 50vh;
+    top: 45vh;
     transform: translateY(-50%);
   }
 }
 
+
+/* iPhone 5/SE */
+@media only screen and (max-width: 340px) {
+  form *:not(button) {
+    margin-bottom: 15px;
+  }
+
+  label, select, input, textarea {
+    font-size: 20px;
+  }
+}
 
 
 /* Galaxy S5 */

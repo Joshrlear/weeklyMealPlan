@@ -52,6 +52,26 @@ const STORE = {
         "vegan",
         "vegetarian",
         "wheat-free"
+    ],
+    food: [
+        'breakfast',
+        'omelette',
+        'pancakes',
+        'snack',
+        'dessert',
+        'steak',
+        'chicken',
+        'dinner',
+        'pizza',
+        'fruit',
+        'chocolate',
+        'strawberry',
+        'salad',
+        'baked',
+        'bbq+fried',
+        'hamburger',
+        'waffles',
+        'eggs'
     ]
 }
 
@@ -233,7 +253,7 @@ function getRecipes(q, diet, health, dishType, calLimit, exclusions) {
         throw new Error(Response.statusText);
     })
     .then(Responsejson => displayResults(Responsejson))
-    .catch(err => {
+    .catch(err => { console.log(err);
         $('#js-main').html(`<div class="err-message"><h3>Uh oh, something went wrong: ${err.message}</h3><br>
         <p>Your parameters may be too retricitve. Try changing your search parameters and try again.</p></div>`);
     });
@@ -248,30 +268,26 @@ function generateEx(exclude) {
 
 // Determines whether diet is a query parameter
 function isDiet(dietType) {
+    let diet = undefined;
     for (let i of STORE.diet) {
         console.log(i);
         if (i === dietType) {
-            return dietType;
-        }
-        else {
-            return null;
+            diet = i;
+            return diet;
         }
     }
 };
 
-// Determines whether health is a query parameter
 function isHealth(dietType) {
+    let health = undefined;
     for (let i of STORE.health) {
         console.log(i);
         if (i === dietType) {
-            return dietType;
-        }
-        else {
-            return null;
+            health = i;
+            return health;
         }
     }
-};
-
+}
 
 // Handles all css related tasks after clicking Search button
 function handleCssOnSearch() {
@@ -305,15 +321,17 @@ function handleSearch() {
     $('#js-form').submit(event => {
         event.preventDefault();
         const query = $('#js-search-query').val();
-        const dishType = $('#js-meal-dropdown').val();
+        const meal = $('#js-meal-dropdown').val();
         const dietType = $('#js-diet-dropdown').val();
         const calories = $('#js-input').val();
         const exclude = $('#js-textarea').val();
 
         // in the future make diet/health it's own param for better results
-        const q = query ? query : `food`;
-        const diet = isDiet(dietType);
-        const health = isHealth(dietType);
+        const q = query ? query : STORE.food[Math.round(Math.random() * 17)];
+        console.log(q);
+        const dishType = meal !== 'any' ? meal : null;
+        const diet = dietType !== 'none' ? isDiet(dietType) : null;
+        const health = diet === undefined ? isHealth(dietType) : null;
         const calLimit = calories ? `0-${calories}` : calories;
         const exclusions = generateEx(exclude);
         getRecipes(q, diet, health, dishType, calLimit, exclusions);
@@ -329,27 +347,7 @@ function displayBackground(Responsejson) {
 
 // Generate random image for background
 function backgroundImage() {
-    const foodList = [
-        'breakfast',
-        'omelette',
-        'pancakes',
-        'snack',
-        'dessert',
-        'steak',
-        'chicken',
-        'dinner',
-        'pizza',
-        'fruit',
-        'chocolate',
-        'strawberry',
-        'salad',
-        'baked',
-        'bbq+fried',
-        'hamburger',
-        'waffles',
-        'eggs'
-    ]
-
+    const foodList = STORE.food;
     const i = Math.round(Math.random() * 17);
     const foodType = `q=${foodList[i]}`;
 

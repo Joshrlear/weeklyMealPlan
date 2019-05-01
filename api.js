@@ -275,7 +275,9 @@ function isHealth(dietType) {
 
 // Handles all css related tasks after clicking Search button
 function handleCssOnSearch() {
-    $('#js-background').fadeToggle(750);
+    if (window.outerWidth >= 700) {
+        $('#js-background').fadeToggle(750);
+    }
     $('#js-main').toggleClass('form-hidden');
     $('#js-main').toggleClass('container-hidden');
     $('#js-container').toggleClass('hidden');
@@ -288,7 +290,9 @@ function handleCssOnSearch() {
 // Handles css functions when clicking hamburger menu button
 function handleCssOnMenu() {
     $('#js-menu-input').on('click', function() {
-        $('#js-background').fadeToggle(750);
+        if (window.outerWidth >= 700) {
+            $('#js-background').fadeToggle(750);
+        }
         $('#js-container').toggleClass('hidden');
         $('#js-form').toggleClass('hidden')
         $('#js-main').toggleClass('form-hidden')

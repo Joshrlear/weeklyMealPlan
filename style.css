@@ -114,13 +114,6 @@ textarea {
     height: 20%;
 }
 
-.search-button {
-    position: absolute;
-    height: 35px;
-    width: 105px;
-    right: 0px;
-}
-
 :placeholder-shown {
     font-size: 20px;
 }
@@ -141,7 +134,7 @@ li {
   list-style: none;
 }
 
-.box {
+.weekday-recipe {
   width: 100%;
   margin-bottom: 10px;
 }
@@ -343,74 +336,46 @@ tr {
 }
 
 
-/* hamburger menu */
-.menu-toggle {
+/* buttons */
+.button {
+  width: 100px;
+  height: 30px;
+  border-radius: 3px;
+  border: 1px solid darkgrey;
+  background-color: rgb(255, 255, 255);
+  color: grey;
+  font-weight: 600;
+}
+
+.search-button {
+  position: absolute;
+  right: 0px;
+}
+
+.new-search {
   display: block;
   position: fixed;
   top: 25px;
   right: 25px;
-  z-index: 10;
+  z-index: 11;
 }
 
-.menu-toggle input {
-  width: 40px;
-  height: 32px;
-  position: absolute;
-  top: -7px;
-  left: -5px;
-  cursor: pointer;
-  opacity: 0;
-  z-index: 20;
+.back {
+  display: none;
+  position: fixed;
+  top: 25px;
+  right: 25px;
+  z-index: 11;
 }
 
-.menu-toggle span {
-  display: block;
-  width: 33px;
-  height: 4px;
-  margin-bottom: 5px;
-  position: relative;
-  background-color: rgb(214, 214, 214);
-  border-radius: 3px;
-  z-index: 10;
-  transform-origin: 4px 0px;
-  transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1.0),
-              background 0.5s cubic-bezier(0.77, 0.2, 0.05, 1.0),
-              opacity 0.55s ease;
+.button:hover {
+  box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.6);
 }
 
-.menu-toggle span:first-child {
-  transform-origin: 0% 0%;
+.button:active {
+  background-color: grey;
+  color: white;
 }
-
-.menu-toggle span:nth-last-child(2) {
-  transform-origin: 0% 100%;
-}
-
-.menu-toggle input:checked ~ span {
-  opacity: 1;
-  transform: rotate(-45deg) translate(0px, 8px);
-}
-
-.menu-toggle input:checked ~ span:nth-last-child(3) {
-  opacity: 0;
-  transform: rotate(0deg) scale(0.2, 0.2);
-}
-
-.menu-toggle input:checked ~ span:nth-last-child(2) {
-  transform: rotate(45deg) translate(0, -10px);
-}
-
-/* make absolute and centered*/
-.toggleForm {
-  transform: translate(0%, 0);
-}
-
-/* slide form from right */
-.menu-toggle input:checked {
-  transform: none;
-}
-
-
 
 /* All screens except older phones like Galaxy S5 */
 @media only screen and (min-width: 376px) {
@@ -475,9 +440,17 @@ tr {
 
 /* Tablets and larger */
 @media only screen and (min-width: 700px) {
+  .background {
+    display: block;
+  }
+
+  .container-hidden {
+    height: 70vh;
+  }
+
   form {
     width: 65vw;
-    top: 55vh;
+    top: 37vh;
     left: 7vw;
   }
 
@@ -493,8 +466,12 @@ tr {
   /* IPad Pro */
   @media only screen and (min-height: 1300px) {
     form {
-      top: 62vh;
+      top: 35vh;
       left: 7.5vw;
+    }
+
+    .container-hidden {
+      height: 60vh;
     }
   }
 
@@ -507,11 +484,16 @@ tr {
       object-fit: cover;
     }
 
+    .container {
+      width: 550px;
+    }
+
     .container-hidden {
       width: 560px;
       height: 700px;
       background-color: white;
     }
+
     form {
       width: 90%;
       height: 90%;

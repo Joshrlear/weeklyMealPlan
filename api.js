@@ -147,6 +147,7 @@ function getImage(Responsejson, i) {
 
 // Clears previous values and displays new week meal plan results
 function displayResults(Responsejson) {
+    handleCssOnMenu();
     $('#js-container').empty();
     
     const num = Responsejson.to;
@@ -166,7 +167,7 @@ function displayResults(Responsejson) {
         
         $('#js-container').append(
             `
-            <li id="js-box" class="box box1" data-expand="false">
+            <li id="js-weekday-recipe" class="weekday-recipe" data-expand="false">
               <section id="js-header-container" class="header-container">
               <header role="header" id="js-recipe-header" class="recipe-header">
                   <h1>${day}</h1>
@@ -199,7 +200,8 @@ function displayResults(Responsejson) {
         )
         
     }
-    $('#js-menu-toggle').removeClass('hidden');
+    $('#js-search-toggle').removeClass('hidden');
+
 }
 
 
@@ -255,7 +257,7 @@ function getRecipes(q, diet, health, dishType, calLimit, exclusions) {
     .then(Responsejson => displayResults(Responsejson))
     .catch(err => { console.log(err);
         $('#js-main').html(`<div class="err-message"><h3>Uh oh, something went wrong: ${err.message}</h3><br>
-        <p>Your parameters may be too retricitve. Try changing your search parameters and try again.</p></div>`);
+        <p>Broaden your search criteria and try again.</p></div>`);
     });
 }
 
@@ -298,14 +300,13 @@ function handleCssOnSearch() {
     $('#js-main').toggleClass('container-hidden');
     $('#js-container').toggleClass('hidden');
     $('#js-form').toggleClass('hidden');
-    $('#js-menu-toggle').one().fadeIn(750);
-    $('#js-menu-input').prop('checked', false);
+    $('#js-search-toggle').one().fadeIn(750);
 }
 
 
 // Handles css functions when clicking hamburger menu button
 function handleCssOnMenu() {
-    $('#js-menu-input').on('click', function() {
+    $('#js-search-toggle').on('click', function() {
         if (window.outerWidth >= 700) {
             $('#js-background').fadeToggle(750);
         }
@@ -370,5 +371,4 @@ function backgroundImage() {
 $(function onLoad() {
     backgroundImage()
     handleSearch();
-    handleCssOnMenu();
 })

@@ -60,9 +60,15 @@ function handleClick() {
   });
 }
 
-$(function onLoad() {
-    console.log('loading animate.js');
-  $('li').find('#js-section').hide();
+function expandFirst() {
+  console.log('expand first');
+
+}
+
+$('#js-form').submit(
+  function onLoad() {
+  console.log('loading animate.js');
+  expandFirst();
   handleClick();
   expandDay();
 });

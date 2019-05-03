@@ -72,7 +72,65 @@ const STORE = {
         'hamburger',
         'waffles',
         'eggs'
-    ]
+    ],
+    form: `
+        <form role="form" id="js-form" class="form">
+            <label for="search-query" id="js-label" class="label">Search for:</label>
+            <input role="search" type="text" name="search-query" id="js-search-query" class="search-bar" placeholder="healthy recipes">
+            <label for="meal-type" id="js-label" class="label">Meal</label>
+            <select name="meal-type" id="js-meal-dropdown" class="dropdown">
+                <option role="option" value="any">any</option>
+                <option role="option" value="breakfast">breakfast</option>
+                <option role="option" value="lunch">lunch</option>
+                <option role="option" value="dinner">dinner</option>
+                <option role="option" value="snack">snack</option>
+                <option role="option" value="dessert">dessert</option>
+            </select>
+            <label for="diet" id="js-label" class="label">Diet:</label>
+            <select name="diet" id="js-diet-dropdown" class="dropdown">
+                <option role="option" value="none">none</option>
+                <option role="option" value="balanced">balanced</option>
+                <option role="option" value="high-fiber">high-fiber</option>
+                <option role="option" value="high-protein">high-protein</option>
+                <option role="option" value="low-carb">low-carb</option>
+                <option role="option" value="low-fat">low-fat</option>
+                <option role="option" value="low-sodium">low-sodium</option>
+                <option role="option" value="alcohol-free">alcohol-free</option>
+                <option role="option" value="celery-free">celery-free</option>
+                <option role="option" value="crustacean-free">crustacean-free</option>
+                <option role="option" value="dairy-free">dairy-free</option>
+                <option role="option" value="egg-free">egg-free</option>
+                <option role="option" value="fish-free">fish-free</option>
+                <option role="option" value="gluten-free">gluten-free</option>
+                <option role="option" value="keto-friendly">keto-friendly</option>
+                <option role="option" value="kidney-friendly">kidney-friendly</option>
+                <option role="option" value="kosher">kosher</option>
+                <option role="option" value="low-potassium">low-potassium</option>
+                <option role="option" value="lupine-free">lupine-free</option>
+                <option role="option" value="mustard-free">mustard-free</option>
+                <option role="option" value="No-oil-added">No-oil-added</option>
+                <option role="option" value="low-sugar">low-sugar</option>
+                <option role="option" value="paleo">paleo</option>
+                <option role="option" value="peanut-free">peanut-free</option>
+                <option role="option" value="pescatarian">pescatarian</option>
+                <option role="option" value="pork-free">pork-free</option>
+                <option role="option" value="red-meat-free">red-meat-free</option>
+                <option role="option" value="sesame-free">sesame-free</option>
+                <option role="option" value="shellfish-free">shellfish-free</option>
+                <option role="option" value="soy-free">soy-free</option>
+                <option role="option" value="sugar-conscious">sugar-conscious</option>
+                <option role="option" value="tree-nut-free">tree-nut-free</option>
+                <option role="option" value="vegan">vegan</option>
+                <option role="option" value="vegetarian">vegetarian</option>
+                <option role="option" value="wheat-free">wheat-free</option>
+            </select>
+            <label for="cal-limit" id="js-label" class="label">Max Calories Per Meal:</label>
+            <input role="text" type="number" name="cal-limit" id="js-input" min="0" placeholder="Daily calorie limit (ex. 750)">
+            <label for="exclusions" id="js-label" class="label">Exclusions:</label>
+            <textarea role="textbox" name="exclusions" id="js-textarea" cols="30" rows="10" placeholder="Gluten, nuts..."></textarea>
+            <button role="button" type="submit" id="js-button" class="button search-button">Search</button>
+        </form>
+    `
 }
 
 // Determine today and get remaining 6 days
@@ -147,6 +205,8 @@ function getImage(Responsejson, i) {
 
 // Clears previous values and displays new week meal plan results
 function displayResults(Responsejson) {
+    handleCssOnSearch();
+    $('#js-search-back').one().removeClass('hidden');
     $('#js-container').empty();
     
     const num = Responsejson.to;
@@ -166,7 +226,7 @@ function displayResults(Responsejson) {
         
         $('#js-container').append(
             `
-            <li id="js-box" class="box box1" data-expand="false">
+            <li id="js-weekday-recipe" class="weekday-recipe" data-expand="false">
               <section id="js-header-container" class="header-container">
               <header role="header" id="js-recipe-header" class="recipe-header">
                   <h1>${day}</h1>
@@ -199,7 +259,7 @@ function displayResults(Responsejson) {
         )
         
     }
-    $('#js-menu-toggle').removeClass('hidden');
+
 }
 
 
@@ -211,6 +271,31 @@ function formatQueryParams(params) {
         return queryItems.join('&');
 }
 
+function closeErr() {
+    $('#js-close-err').click(function () {
+        $('#js-err-container').fadeOut(500, function () {
+            $('#js-err-container').remove();
+        });
+        
+    })
+}
+
+function alertErr() {
+    $('#js-main').append(
+        `
+        <div id="js-err-container">
+            <div id="js-err-message" class="err-message hidden">
+                <a id="js-close-err" class="circle"><span></span><span></span></a>
+                <h3>Something went wrong:</h3>
+                <h4>Broaden your search criteria and try again</h4>
+            </div>
+            <div class="darken-background"></div>
+        </div>
+    `
+    );
+    $('#js-err-message').fadeIn(500);
+    closeErr();
+}
 
 // Compile query and call edamam api
 function getRecipes(q, diet, health, dishType, calLimit, exclusions) {
@@ -253,9 +338,11 @@ function getRecipes(q, diet, health, dishType, calLimit, exclusions) {
         throw new Error(Response.statusText);
     })
     .then(Responsejson => displayResults(Responsejson))
-    .catch(err => { console.log(err);
-        $('#js-main').html(`<div class="err-message"><h3>Uh oh, something went wrong: ${err.message}</h3><br>
-        <p>Your parameters may be too retricitve. Try changing your search parameters and try again.</p></div>`);
+    .catch(err => {
+        console.log(err);
+        alertErr();
+        //$('#js-form').addClass('hidden');
+        //$('#js-container').addClass('hidden');
     });
 }
 
@@ -270,7 +357,6 @@ function generateEx(exclude) {
 function isDiet(dietType) {
     let diet = undefined;
     for (let i of STORE.diet) {
-        console.log(i);
         if (i === dietType) {
             diet = i;
             return diet;
@@ -281,7 +367,6 @@ function isDiet(dietType) {
 function isHealth(dietType) {
     let health = undefined;
     for (let i of STORE.health) {
-        console.log(i);
         if (i === dietType) {
             health = i;
             return health;
@@ -289,7 +374,7 @@ function isHealth(dietType) {
     }
 }
 
-// Handles all css related tasks after clicking Search button
+// Handles all css related tasks after clicking "search" button
 function handleCssOnSearch() {
     if (window.outerWidth >= 700) {
         $('#js-background').fadeToggle(750);
@@ -298,14 +383,18 @@ function handleCssOnSearch() {
     $('#js-main').toggleClass('container-hidden');
     $('#js-container').toggleClass('hidden');
     $('#js-form').toggleClass('hidden');
-    $('#js-menu-toggle').one().fadeIn(750);
-    $('#js-menu-input').prop('checked', false);
+    //$('#js-search-toggle').one().fadeIn(750);
+    $('#js-search').show();
+    $('#js-search-back').text('New Search');
 }
 
-
-// Handles css functions when clicking hamburger menu button
-function handleCssOnMenu() {
-    $('#js-menu-input').on('click', function() {
+function handleCssOnNewSearch() {
+    $('#js-search-back').on('click', function() {
+        $(this).text(function(i, text) {
+            return text === 'New Search' ? 'Back' : 'New Search';
+        });
+        console.log('running');
+        $('#js-err-message').remove();
         if (window.outerWidth >= 700) {
             $('#js-background').fadeToggle(750);
         }
@@ -335,7 +424,6 @@ function handleSearch() {
         const calLimit = calories ? `0-${calories}` : calories;
         const exclusions = generateEx(exclude);
         getRecipes(q, diet, health, dishType, calLimit, exclusions);
-        handleCssOnSearch()
     })
 }
 
@@ -370,5 +458,5 @@ function backgroundImage() {
 $(function onLoad() {
     backgroundImage()
     handleSearch();
-    handleCssOnMenu();
+    handleCssOnNewSearch();
 })

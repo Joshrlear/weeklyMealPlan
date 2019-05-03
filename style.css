@@ -114,13 +114,6 @@ textarea {
     height: 20%;
 }
 
-.search-button {
-    position: absolute;
-    height: 35px;
-    width: 105px;
-    right: 0px;
-}
-
 :placeholder-shown {
     font-size: 20px;
 }
@@ -141,7 +134,7 @@ li {
   list-style: none;
 }
 
-.box {
+.weekday-recipe {
   width: 100%;
   margin-bottom: 10px;
 }
@@ -221,7 +214,71 @@ img {
 
 /* error message */
 .err-message {
-  padding: 30px;
+  padding: 35px 30px;
+  max-width: 300px;
+  width: 80%;
+  background-color: white;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 3px;
+  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.6);
+  transition: box-shadow 200ms ease-in-out;
+  z-index: 20;
+}
+
+.err-message:hover {
+  box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.4);
+}
+
+.circle {
+  position: absolute;
+  top:30px;
+  right: 45px;
+  border-radius: 50%;
+  z-index: 21;
+}
+
+.circle span {
+  position: absolute;
+  background-color: grey;
+  height: 5px;
+  width: 25px;
+  border-radius: 20px;
+  transition: all 100ms ease-in-out;
+}
+
+.circle:hover span {
+  background-color: red;
+}
+
+.circle span:first-child {
+  transform: rotate(45deg);
+}
+
+.circle span:last-child {
+  transform: rotate(-45deg);
+}
+
+.err-message h3 {
+  margin-top: 20px;
+}
+
+.err-message h4 {
+  font-weight: 500;
+  font-family: 'Poppins', sans-serif;
+}
+
+.darken-background {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 19;
 }
 
 
@@ -343,74 +400,37 @@ tr {
 }
 
 
-/* hamburger menu */
-.menu-toggle {
-  display: block;
+/* buttons */
+.button {
+  width: 100px;
+  height: 30px;
+  border-radius: 3px;
+  border: 1px solid darkgrey;
+  background-color: rgb(255, 255, 255);
+  color: grey;
+  font-weight: 600;
+}
+
+.search-button {
+  position: absolute;
+  right: 0px;
+}
+
+.search-back {
   position: fixed;
   top: 25px;
   right: 25px;
-  z-index: 10;
+  z-index: 11;
 }
 
-.menu-toggle input {
-  width: 40px;
-  height: 32px;
-  position: absolute;
-  top: -7px;
-  left: -5px;
-  cursor: pointer;
-  opacity: 0;
-  z-index: 20;
+.button:hover {
+  box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.6);
 }
 
-.menu-toggle span {
-  display: block;
-  width: 33px;
-  height: 4px;
-  margin-bottom: 5px;
-  position: relative;
-  background-color: rgb(214, 214, 214);
-  border-radius: 3px;
-  z-index: 10;
-  transform-origin: 4px 0px;
-  transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1.0),
-              background 0.5s cubic-bezier(0.77, 0.2, 0.05, 1.0),
-              opacity 0.55s ease;
+.button:active {
+  background-color: grey;
+  color: white;
 }
-
-.menu-toggle span:first-child {
-  transform-origin: 0% 0%;
-}
-
-.menu-toggle span:nth-last-child(2) {
-  transform-origin: 0% 100%;
-}
-
-.menu-toggle input:checked ~ span {
-  opacity: 1;
-  transform: rotate(-45deg) translate(0px, 8px);
-}
-
-.menu-toggle input:checked ~ span:nth-last-child(3) {
-  opacity: 0;
-  transform: rotate(0deg) scale(0.2, 0.2);
-}
-
-.menu-toggle input:checked ~ span:nth-last-child(2) {
-  transform: rotate(45deg) translate(0, -10px);
-}
-
-/* make absolute and centered*/
-.toggleForm {
-  transform: translate(0%, 0);
-}
-
-/* slide form from right */
-.menu-toggle input:checked {
-  transform: none;
-}
-
-
 
 /* All screens except older phones like Galaxy S5 */
 @media only screen and (min-width: 376px) {
@@ -475,9 +495,17 @@ tr {
 
 /* Tablets and larger */
 @media only screen and (min-width: 700px) {
+  .background {
+    display: block;
+  }
+
+  .container-hidden {
+    height: 70vh;
+  }
+
   form {
     width: 65vw;
-    top: 55vh;
+    top: 37vh;
     left: 7vw;
   }
 
@@ -493,8 +521,12 @@ tr {
   /* IPad Pro */
   @media only screen and (min-height: 1300px) {
     form {
-      top: 62vh;
+      top: 35vh;
       left: 7.5vw;
+    }
+
+    .container-hidden {
+      height: 60vh;
     }
   }
 
@@ -507,11 +539,16 @@ tr {
       object-fit: cover;
     }
 
+    .container {
+      width: 550px;
+    }
+
     .container-hidden {
       width: 560px;
       height: 700px;
       background-color: white;
     }
+
     form {
       width: 90%;
       height: 90%;

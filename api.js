@@ -205,6 +205,8 @@ function getImage(Responsejson, i) {
 
 // Clears previous values and displays new week meal plan results
 function displayResults(Responsejson) {
+    handleCssOnSearch();
+    $('#js-search-back').one().removeClass('hidden');
     $('#js-container').empty();
     
     const num = Responsejson.to;
@@ -269,6 +271,31 @@ function formatQueryParams(params) {
         return queryItems.join('&');
 }
 
+function closeErr() {
+    $('#js-close-err').click(function () {
+        $('#js-err-container').fadeOut(500, function () {
+            $('#js-err-container').remove();
+        });
+        
+    })
+}
+
+function alertErr() {
+    $('#js-main').append(
+        `
+        <div id="js-err-container">
+            <div id="js-err-message" class="err-message hidden">
+                <a id="js-close-err" class="circle"><span></span><span></span></a>
+                <h3>Something went wrong:</h3>
+                <h4>Broaden your search criteria and try again</h4>
+            </div>
+            <div class="darken-background"></div>
+        </div>
+    `
+    );
+    $('#js-err-message').fadeIn(500);
+    closeErr();
+}
 
 // Compile query and call edamam api
 function getRecipes(q, diet, health, dishType, calLimit, exclusions) {
@@ -311,11 +338,11 @@ function getRecipes(q, diet, health, dishType, calLimit, exclusions) {
         throw new Error(Response.statusText);
     })
     .then(Responsejson => displayResults(Responsejson))
-    .catch(err => { console.log(err);
-        $('#js-main').append(`<div id="js-err-message" class="err-message"><h3>Uh oh, something went wrong: ${err.message}</h3><br>
-        <p>Broaden your search criteria and try again.</p></div>`);
-        $('#js-form').addClass('hidden');
-        $('#js-container').addClass('hidden');
+    .catch(err => {
+        console.log(err);
+        alertErr();
+        //$('#js-form').addClass('hidden');
+        //$('#js-container').addClass('hidden');
     });
 }
 
@@ -330,7 +357,6 @@ function generateEx(exclude) {
 function isDiet(dietType) {
     let diet = undefined;
     for (let i of STORE.diet) {
-        console.log(i);
         if (i === dietType) {
             diet = i;
             return diet;
@@ -341,7 +367,6 @@ function isDiet(dietType) {
 function isHealth(dietType) {
     let health = undefined;
     for (let i of STORE.health) {
-        console.log(i);
         if (i === dietType) {
             health = i;
             return health;
@@ -360,6 +385,7 @@ function handleCssOnSearch() {
     $('#js-form').toggleClass('hidden');
     //$('#js-search-toggle').one().fadeIn(750);
     $('#js-search').show();
+    $('#js-search-back').text('New Search');
 }
 
 function handleCssOnNewSearch() {
@@ -376,39 +402,8 @@ function handleCssOnNewSearch() {
         $('#js-form').toggleClass('hidden')
         $('#js-main').toggleClass('form-hidden')
         $('#js-main').toggleClass('container-hidden');
-        console.log('working');
     })
 }
-
-// Handles all css related tasks after clicking "new search" button
-/*function handleCssOnNewSearch() {
-    $('#js-search').on('click', function() {
-        $('#js-search').hide();
-        $('#js-back').show();
-        $('#js-err-message').remove();
-        if (window.outerWidth >= 700) {
-            $('#js-background').fadeToggle(750);
-        }
-        $('#js-container').toggleClass('hidden');
-        $('#js-form').toggleClass('hidden')
-        $('#js-main').toggleClass('form-hidden')
-        $('#js-main').toggleClass('container-hidden');
-    })
-}*/
-
-/*function handleCssOnBack() {
-    $('#js-back').on('click', function() {
-        $('#js-back').hide();
-        $('#js-search').show();
-        if (window.outerWidth >= 700) {
-            $('#js-background').fadeToggle(750);
-        }
-        $('#js-container').toggleClass('hidden');
-        $('#js-form').toggleClass('hidden')
-        $('#js-main').toggleClass('form-hidden')
-        $('#js-main').toggleClass('container-hidden');
-    })
-}*/
 
 // Runs after clicking search button on start page
 function handleSearch() {
@@ -429,8 +424,6 @@ function handleSearch() {
         const calLimit = calories ? `0-${calories}` : calories;
         const exclusions = generateEx(exclude);
         getRecipes(q, diet, health, dishType, calLimit, exclusions);
-        handleCssOnSearch();
-        $('#js-search-back').one().removeClass('hidden');
     })
 }
 

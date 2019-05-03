@@ -23,7 +23,6 @@ function expandDay() {
     */}
       
 
-    console.log('here');
     // animate on expand
     $('[data-expand="true"]').find('#js-section').toggleClass('hidden');
     $('[data-expand="true"]').find('#js-recipe-img').removeClass('tint-blur');
@@ -39,7 +38,6 @@ function expandDay() {
   })
     */}
 
-    console.log('now here');
     // animate on collapse
     $('[data-expand="false"]').find('#js-section').hide(500);
     $('[data-expand="false"]').find('#js-recipe-header').fadeIn(750);
@@ -54,7 +52,6 @@ Only allows one data-expand="true" at a time
 */
 function handleClick() {
   $('#js-container').on('click', 'li', function () {
-    console.log('clicked');
     const clicked = $(this).attr('data-expand', $(this).attr('data-expand') == 'false'
       ? 'true'
       : 'false');
@@ -64,7 +61,6 @@ function handleClick() {
 }
 
 $(function onLoad() {
-  console.log('start');
   handleClick();
   expandDay();
 })

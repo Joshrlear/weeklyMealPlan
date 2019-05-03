@@ -352,16 +352,7 @@ tr {
   right: 0px;
 }
 
-.new-search {
-  display: block;
-  position: fixed;
-  top: 25px;
-  right: 25px;
-  z-index: 11;
-}
-
-.back {
-  display: none;
+.search-back {
   position: fixed;
   top: 25px;
   right: 25px;

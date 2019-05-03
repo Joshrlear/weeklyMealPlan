@@ -41,13 +41,16 @@ https://github.com/Joshrlear/weeklyMealPlan/blob/master/images/capstone-mobile-w
 https://github.com/Joshrlear/weeklyMealPlan/blob/master/images/capstone-mobile-weeklist-open.png
 
 
-Target User:
-- busy parents
+Target User: busy parents
 
 
 Tech currently being used:
-HTML, CSS, JS, jQuery
+- HTML
+- CSS
+- JS
+- jQuery
 
 
 Api currently used:
-edmama api, pixabay api
+- edmama api
+- pixabay api

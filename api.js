@@ -72,65 +72,7 @@ const STORE = {
         'hamburger',
         'waffles',
         'eggs'
-    ],
-    form: `
-        <form role="form" id="js-form" class="form">
-            <label for="search-query" id="js-label" class="label">Search for:</label>
-            <input role="search" type="text" name="search-query" id="js-search-query" class="search-bar" placeholder="healthy recipes">
-            <label for="meal-type" id="js-label" class="label">Meal</label>
-            <select name="meal-type" id="js-meal-dropdown" class="dropdown">
-                <option role="option" value="any">any</option>
-                <option role="option" value="breakfast">breakfast</option>
-                <option role="option" value="lunch">lunch</option>
-                <option role="option" value="dinner">dinner</option>
-                <option role="option" value="snack">snack</option>
-                <option role="option" value="dessert">dessert</option>
-            </select>
-            <label for="diet" id="js-label" class="label">Diet:</label>
-            <select name="diet" id="js-diet-dropdown" class="dropdown">
-                <option role="option" value="none">none</option>
-                <option role="option" value="balanced">balanced</option>
-                <option role="option" value="high-fiber">high-fiber</option>
-                <option role="option" value="high-protein">high-protein</option>
-                <option role="option" value="low-carb">low-carb</option>
-                <option role="option" value="low-fat">low-fat</option>
-                <option role="option" value="low-sodium">low-sodium</option>
-                <option role="option" value="alcohol-free">alcohol-free</option>
-                <option role="option" value="celery-free">celery-free</option>
-                <option role="option" value="crustacean-free">crustacean-free</option>
-                <option role="option" value="dairy-free">dairy-free</option>
-                <option role="option" value="egg-free">egg-free</option>
-                <option role="option" value="fish-free">fish-free</option>
-                <option role="option" value="gluten-free">gluten-free</option>
-                <option role="option" value="keto-friendly">keto-friendly</option>
-                <option role="option" value="kidney-friendly">kidney-friendly</option>
-                <option role="option" value="kosher">kosher</option>
-                <option role="option" value="low-potassium">low-potassium</option>
-                <option role="option" value="lupine-free">lupine-free</option>
-                <option role="option" value="mustard-free">mustard-free</option>
-                <option role="option" value="No-oil-added">No-oil-added</option>
-                <option role="option" value="low-sugar">low-sugar</option>
-                <option role="option" value="paleo">paleo</option>
-                <option role="option" value="peanut-free">peanut-free</option>
-                <option role="option" value="pescatarian">pescatarian</option>
-                <option role="option" value="pork-free">pork-free</option>
-                <option role="option" value="red-meat-free">red-meat-free</option>
-                <option role="option" value="sesame-free">sesame-free</option>
-                <option role="option" value="shellfish-free">shellfish-free</option>
-                <option role="option" value="soy-free">soy-free</option>
-                <option role="option" value="sugar-conscious">sugar-conscious</option>
-                <option role="option" value="tree-nut-free">tree-nut-free</option>
-                <option role="option" value="vegan">vegan</option>
-                <option role="option" value="vegetarian">vegetarian</option>
-                <option role="option" value="wheat-free">wheat-free</option>
-            </select>
-            <label for="cal-limit" id="js-label" class="label">Max Calories Per Meal:</label>
-            <input role="text" type="number" name="cal-limit" id="js-input" min="0" placeholder="Daily calorie limit (ex. 750)">
-            <label for="exclusions" id="js-label" class="label">Exclusions:</label>
-            <textarea role="textbox" name="exclusions" id="js-textarea" cols="30" rows="10" placeholder="Gluten, nuts..."></textarea>
-            <button role="button" type="submit" id="js-button" class="button search-button">Search</button>
-        </form>
-    `
+    ]
 }
 
 // Determine today and get remaining 6 days
@@ -415,7 +357,7 @@ function handleSearch() {
         const calories = $('#js-input').val();
         const exclude = $('#js-textarea').val();
 
-        // in the future make diet/health it's own param for better results
+
         const q = query ? query : STORE.food[Math.round(Math.random() * 17)];
         console.log(q);
         const dishType = meal !== 'any' ? meal : null;
@@ -454,7 +396,7 @@ function backgroundImage() {
     });
 }
 
-// Runs on page load
+
 $(function onLoad() {
     backgroundImage()
     handleSearch();

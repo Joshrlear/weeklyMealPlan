@@ -152,7 +152,6 @@ function displayResults(Responsejson) {
     $('#js-container').empty();
     
     const num = Responsejson.to;
-    console.log(Responsejson);
 
     
     // Generate 7 day meal plan
@@ -207,7 +206,6 @@ function displayResults(Responsejson) {
 
 // Formats parameters for edamam api
 function formatQueryParams(params) {
-    console.log(params);
     const queryItems = Object.keys(params).map(key =>
         `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`)
         return queryItems.join('&');
@@ -335,7 +333,10 @@ function handleCssOnNewSearch() {
         $(this).text(function(i, text) {
             return text === 'New Search' ? 'Back' : 'New Search';
         });
-        console.log('running');
+
+        // line below formats back button for iPhone 5/SE
+        $(this).toggleClass('bottom-left');
+
         $('#js-err-message').remove();
         if (window.outerWidth >= 700) {
             $('#js-background').fadeToggle(750);
@@ -359,7 +360,6 @@ function handleSearch() {
 
 
         const q = query ? query : STORE.food[Math.round(Math.random() * 17)];
-        console.log(q);
         const dishType = meal !== 'any' ? meal : null;
         const diet = dietType !== 'none' ? isDiet(dietType) : null;
         const health = diet === undefined ? isHealth(dietType) : null;
@@ -382,7 +382,6 @@ function backgroundImage() {
     const foodType = `q=${foodList[i]}`;
 
     const url = pixabayurl + '?' + 'key=' + pixabayKey + '&image_type=photo' + '&'+ foodType + '&editors_choice=true';
-    console.log(url);
     fetch(url)
     .then(Response => {
         if(Response.ok) {
